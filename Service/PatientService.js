@@ -83,6 +83,18 @@ const patientService={
         catch(err){
             return response.msg=err;
         }
+    },
+
+    patientProfile: async(token)=>{
+        const response={};
+        let id=jwtHelper.jwtVerify(token,keys.jwtKey);
+        try{
+            response=await regModel.findById(id);
+            return response;
+        }
+        catch(err){
+            return response.msg=err;
+        }
     }
 
 }
