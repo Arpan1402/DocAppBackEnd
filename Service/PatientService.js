@@ -2,7 +2,6 @@ const express=require('express');
 const jwtHelper=require('../Helper/jwt');
 const encryptHelper=require('../Helper/encrypt');
 const regModel=require('../Database/Models/patient/registration');
-const profileModel=require('../Database/Models/patient/profile');
 const emailSender=require('../Utils/email');
 const jwt=require('jsonwebtoken');
 const keys=require('../Config/Keys');
@@ -47,14 +46,14 @@ const patientService={
         }
     },
 
-    profileSetUp: async(fname,lname,address,age,dob,phone,height,weight,avatar)=>{
+    profileSetUp: async(token,fname,lname,address,age,dob,phone,height,weight,avatar)=>{
         const response={}
+        let id=jwtHelper.jwtVerify(token,keys.jwtKey);
+        let patientInfo={firstName:fname}
         try{
-            let patientProfile=profileModel({
-
-            })
-
-            let conf=regModel.updateOne()
+            
+            let conf=await regModel.findByIdAndUpdate(id,patientInfo,{new:true});
+            return response.msg="profile updated";
         }
         catch(err){
             throw new err;
