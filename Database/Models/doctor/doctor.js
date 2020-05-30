@@ -25,6 +25,13 @@ let DocSchema=new mongoose.Schema({
     avatar:{
         type:String,
         required:false
+    },
+    organization:{
+        type:Object,
+        required:true
+        // orgName:String,
+        // orgAddress:String,
+        // orgPhone:Number
     }
 })
 

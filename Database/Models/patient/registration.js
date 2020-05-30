@@ -39,32 +39,19 @@ const newSchema=new mongoose.Schema({
         default:false
     },
     firstName:{
-        type:String,
+        type:String
     },
     lastName:{
-        type:String,
+        type:String
     },
     gender:{
-        type:String,
+        type:String
     },
     dob:{
-        type:Date,
+        type:Date
     },
     address:{
-        building:String,
-        street:String,
-        district:{
-            type:String,
-        },
-        pin:{
-            type:Number,
-        },
-        state:{
-            type:String,
-        },
-        country:{
-            type:String,
-        }
+        type:String
     },
     phoneNumber:{
         type:Number
@@ -76,13 +63,13 @@ const newSchema=new mongoose.Schema({
     },
     presciption:{
         doctorName:{
-            type:String,
+            type:String
         },
         issueDate:{
-            type:Date,
+            type:Date
         },
         presciption:{
-            type:String,
+            type:String
         },
     }
 });

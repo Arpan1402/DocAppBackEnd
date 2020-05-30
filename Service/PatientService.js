@@ -46,14 +46,31 @@ const patientService={
         }
     },
 
-    profileSetUp: async(token,fname,lname,address,age,dob,phone,height,weight,avatar)=>{
+    profileSetUp: async(token,fname,lname,address,dob,phone,height,weight,gender,avatar,presciption)=>{
         const response={}
-        let id=jwtHelper.jwtVerify(token);
-        console.log(id)
-        let patientInfo={firstName:fname}
+
+        // let pres={
+        //     doctorName:presciption.doc,
+        //     issueDate:presciption.idate,
+        //     presciption:presciption.presciption
+        // };
+
+        let patientInfo={
+            firstName:fname,
+            lastName:lname,
+            address:address,
+            gender:gender,
+            dob:dob,
+            phoneNumber:phone,
+            height:height,
+            weight:weight,
+            avatar:avatar,
+            presciption:presciption
+        }
         try{
-            
-            let conf=await regModel.findByIdAndUpdate(id,patientInfo,{new:true});
+            let id=await jwtHelper.jwtVerify(token);
+            console.log(id.user)
+            let conf=await regModel.findByIdAndUpdate(id.user,patientInfo,{new:true});
             return response.msg="profile updated";
         }
         catch(err){
@@ -75,7 +92,7 @@ const patientService={
                 console.log(patient.email);
                 compare = await encryptHelper.check(pass, patient.password);
                 if (compare) {
-                    let token = await jwt.sign({ user: patient.id }, keys.tokenkey);
+                    let token = await jwtHelper.createTokenForEmail(patient);
                     console.log(token)
                     return response.msg = token;
                 }
@@ -87,15 +104,18 @@ const patientService={
     },
 
     patientProfile: async(token)=>{
-        const response={};
-        console.log('before verify');
-        let id=await jwtHelper.jwtVerify(token);
-        console.log(id);
+        let response={};
+        
         try{
-            response=await regModel.findById(id);
+            // console.log('before verify'+token);
+            let id=await jwtHelper.jwtVerify(token);
+            //console.log(id.user);
+            response=await regModel.findById(id.user);
+            console.log(response+"res");
             return response;
         }
         catch(err){
+            console.log(err);
             return response.msg=err;
         }
     }

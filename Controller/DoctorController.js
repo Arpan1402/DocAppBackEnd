@@ -9,6 +9,7 @@ const DocController={
         let gender=req.body.gender;
         let spec=req.body.spec;
         let avatar=req.body.avatar;
+        let org=req.body.org;
 
         if(!fname)
         {
@@ -30,9 +31,21 @@ const DocController={
         {
             return res.json({message:'Specialization not found'}).status(500);
         }
+        else  if(!org.name)
+        {
+            return res.json({message:'Organiztion Name not found'}).status(500);
+        }
+        else  if(!org.add)
+        {
+            return res.json({message:'Organiztion Address not found'}).status(500);
+        }
+        else  if(!org.phone)
+        {
+            return res.json({message:'Organiztion Phone Number not found'}).status(500);
+        }
         else
         {
-            let response=await docService.uploadProfile(fname,lname,gender,dob,spec,avatar);
+            let response=await docService.uploadProfile(fname,lname,gender,dob,spec,org,avatar);
             console.log(response)
             return res.json(response).status(200);
         }

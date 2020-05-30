@@ -24,7 +24,7 @@ const DocController={
         }
     },
 
-    uploadProfile: async(firstName,lastName,gender,dob,specializtion,avatar)=>{
+    uploadProfile: async(firstName,lastName,gender,dob,specializtion,organization,avatar)=>{
         let response={}
         try{
             let doctor=DocModel({
@@ -33,6 +33,7 @@ const DocController={
                 gender,
                 dob,
                 specializtion,
+                organization,
                 avatar
             });
     

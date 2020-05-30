@@ -48,13 +48,26 @@ const patientController={
         const token=req.body.token;
         const fname=req.body.fname;
         const lname=req.body.lname;
-        const age=req.body.age;
+        const gender=req.body.gender;
         const dob=req.body.dob;
         const address=req.body.address;
         const phone=req.body.phone;
         const height=req.body.height;
         const weight=req.body.weight;
         const avatar=req.body.avatar;
+        const presciption=req.body.presciption;
+
+        if(presciption){
+            if(!presciption.doc){
+                return res.json({message:'Doctor Name not found'}).status(500);
+            }
+            else if(!presciption.idate){
+                return res.json({message:'Issue Date not found'}).status(500);
+            }
+            else if(!presciption.presciption){
+                return res.json({message:'Presciption not found'}).status(500);
+            }
+        }
 
         if(!token)
         {
@@ -64,33 +77,33 @@ const patientController={
         {
             return res.json({message:'First Name not found'}).status(500);
         }
-        // else  if(!lname)
-        // {
-        //     return res.json({message:'Last Name not found'}).status(500);
-        // }
-        // else  if(!age)
-        // {
-        //     return res.json({message:'Age not found'}).status(500);
-        // }
-        // else  if(!dob)
-        // {
-        //     return res.json({message:'Date of Birth not found'}).status(500);
-        // }
-        // else  if(!address)
-        // {
-        //     return res.json({message:'Address not found'}).status(500);
-        // }
-        // else  if(!height)
-        // {
-        //     return res.json({message:'Height not found'}).status(500);
-        // }
-        // else  if(!weight)
-        // {
-        //     return res.json({message:'Weight not found'}).status(500);
-        // }
+        else  if(!lname)
+        {
+            return res.json({message:'Last Name not found'}).status(500);
+        }
+        else  if(!dob)
+        {
+            return res.json({message:'Date of Birth not found'}).status(500);
+        }
+        else  if(!address)
+        {
+            return res.json({message:'Address not found'}).status(500);
+        }
+        else  if(!gender)
+        {
+            return res.json({message:'Gender not found'}).status(500);
+        }
+        else  if(!height)
+        {
+            return res.json({message:'Height not found'}).status(500);
+        }
+        else  if(!weight)
+        {
+            return res.json({message:'Weight not found'}).status(500);
+        }
         else
         {
-            let message=await patientService.profileSetUp(token,fname,lname,address,age,dob,phone,height,weight,avatar);
+            let message=await patientService.profileSetUp(token,fname,lname,address,dob,phone,height,weight,gender,avatar,presciption);
 
             return res.json(message);
         }

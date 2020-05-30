@@ -4,6 +4,7 @@ const key=require('../Config/Keys');
 const tokenManager={
 
     createTokenForEmail: async(user)=>{
+        console.log(key.jwtKey+"this is key");
         let token=await jwt.sign(
             {
                 user:user.id
