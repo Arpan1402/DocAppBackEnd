@@ -1,7 +1,9 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const connection=require('./Database/dbConnection');
-const router=require('./Routes/Patient');
+const prouter=require('./Routes/Patient');
+const drouter=require('./Routes/Doctor');
+
 
 connection();
 
@@ -11,13 +13,13 @@ app.use(express.json());
 
 const PORT=process.env.PORT||6000;
 
-app.post('/register',router);
-app.post('/login',router);
-app.post('/profile',router);
-app.post('/doctor',router);
-app.get('/doctorList',router);
-app.get('/doctorProfile',router);
-app.get('/patientProfile',router);
+app.post('/register',prouter);
+app.post('/login',prouter);
+app.post('/profile',prouter);
+app.post('/doctor',drouter);
+app.get('/doctorList',drouter);
+app.get('/doctorProfile',drouter);
+app.get('/patientProfile',prouter);
 
 
 app.listen(PORT,()=>{

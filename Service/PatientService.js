@@ -49,6 +49,7 @@ const patientService={
     profileSetUp: async(token,fname,lname,address,age,dob,phone,height,weight,avatar)=>{
         const response={}
         let id=jwtHelper.jwtVerify(token);
+        console.log(id)
         let patientInfo={firstName:fname}
         try{
             
@@ -88,7 +89,7 @@ const patientService={
     patientProfile: async(token)=>{
         const response={};
         console.log('before verify');
-        let id=jwtHelper.jwtVerify(token);
+        let id=await jwtHelper.jwtVerify(token);
         console.log(id);
         try{
             response=await regModel.findById(id);
