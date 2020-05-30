@@ -96,7 +96,7 @@ const patientController={
         }
     },
 
-    showProfile: async(req,res)=>{a
+    showProfile: async(req,res)=>{
         let token=req.body.token;
         if(!token){
             return res.json({message:"token not found"});

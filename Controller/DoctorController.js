@@ -33,6 +33,7 @@ const DocController={
         else
         {
             let response=await docService.uploadProfile(fname,lname,gender,dob,spec,avatar);
+            console.log(response)
             return res.json(response).status(200);
         }
     },

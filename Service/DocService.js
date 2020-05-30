@@ -6,6 +6,7 @@ const DocController={
     DocList: async()=>{
         try{
             const response=await DocModel.find();
+            console.log(response);
             return response;
         }
         catch(err){
